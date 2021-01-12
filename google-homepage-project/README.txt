@@ -1,0 +1,1 @@
+Simple clone of google's homepage using html and css.
