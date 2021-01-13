@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let computerPlay = () => {
+            let choices = ["rock", "paper", "scissor"];
+            let play = choices[Math.floor(Math.random() * choices.length)];
+            return play;
+        }
+        let cont = 0;
+        let computerChoice, humanChoice;
+        do {
+            computerChoice = computerPlay();
+            humanChoice = window.prompt("Select Rock, Paper or Scissor");
+            humanChoice = humanChoice.toLowerCase();
+            switch (humanChoice) {
+                case "rock":
+                    if (computerChoice == "paper")
+                        console.log("You lost! Computer played " + computerChoice + " and you played " + humanChoice);
+                    else if (computerChoice == "scissor")
+                        console.log("You won! Computer played " + computerChoice + " and you played " + humanChoice);
+                    else
+                        console.log("It's a tie! Computer played " + computerChoice + " and you played " + humanChoice);
+                    break;
+                case "paper":
+                    if (computerChoice == "paper")
+                        console.log("It's a tie! Computer played " + computerChoice + " and you played " + humanChoice);
+                    else if (computerChoice == "scissor")
+                        console.log("You lost! Computer played " + computerChoice + " and you played " + humanChoice);
+                    else
+                        console.log("You won! Computer played " + computerChoice + " and you played " + humanChoice);
+                    break;
+                case "scissor":
+                    if (computerChoice == "paper")
+                        console.log("You won! Computer played " + computerChoice + " and you played " + humanChoice);
+                    else if (computerChoice == "scissor")
+                        console.log("It's a tie! Computer played " + computerChoice + " and you played " + humanChoice);
+                    else
+                        console.log("You lost! Computer played " + computerChoice + " and you played " + humanChoice);
+                    break;
+            }
+            cont++;
+        } while (cont < 3)        
+    </script>
+</body>
+
+</html>
