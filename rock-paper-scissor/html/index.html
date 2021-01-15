@@ -8,47 +8,137 @@
 </head>
 
 <body>
-    <script>
-        let computerPlay = () => {
-            let choices = ["rock", "paper", "scissor"];
-            let play = choices[Math.floor(Math.random() * choices.length)];
-            return play;
-        }
-        let cont = 0;
-        let computerChoice, humanChoice;
-        do {
-            computerChoice = computerPlay();
-            humanChoice = window.prompt("Select Rock, Paper or Scissor");
-            humanChoice = humanChoice.toLowerCase();
-            switch (humanChoice) {
-                case "rock":
-                    if (computerChoice == "paper")
-                        console.log("You lost! Computer played " + computerChoice + " and you played " + humanChoice);
-                    else if (computerChoice == "scissor")
-                        console.log("You won! Computer played " + computerChoice + " and you played " + humanChoice);
-                    else
-                        console.log("It's a tie! Computer played " + computerChoice + " and you played " + humanChoice);
-                    break;
-                case "paper":
-                    if (computerChoice == "paper")
-                        console.log("It's a tie! Computer played " + computerChoice + " and you played " + humanChoice);
-                    else if (computerChoice == "scissor")
-                        console.log("You lost! Computer played " + computerChoice + " and you played " + humanChoice);
-                    else
-                        console.log("You won! Computer played " + computerChoice + " and you played " + humanChoice);
-                    break;
-                case "scissor":
-                    if (computerChoice == "paper")
-                        console.log("You won! Computer played " + computerChoice + " and you played " + humanChoice);
-                    else if (computerChoice == "scissor")
-                        console.log("It's a tie! Computer played " + computerChoice + " and you played " + humanChoice);
-                    else
-                        console.log("You lost! Computer played " + computerChoice + " and you played " + humanChoice);
-                    break;
-            }
-            cont++;
-        } while (cont < 3)        
-    </script>
+    <div id="main">
+        <div class="choiceCard">
+            <img src="../images/rock.png">
+            <button class="btn" value="rock">Play Rock</button>
+        </div>
+        <div class="choiceCard">
+            <img src="../images/paper.png">
+            <button class="btn" value="paper">Play Paper</button>
+        </div>
+        <div class="choiceCard">
+            <img src="../images/scissor.png">
+            <button class="btn" value="scissor">Play Scissor</button>
+        </div>
+        <div id="score">
+            <h1>SCORE</h1>
+            <p id="pScore">PLAYER:0</p>
+            <p id="cScore"> COMPUTER:0</p>
+        </div>        
+    </div>
 </body>
+
+<style>
+    #main {
+        width: 100%;
+        text-align: center;
+        margin-top: 100px;
+    }
+
+    .choiceCard {
+        display: inline-block;
+        margin-right: 100px;
+        box-shadow:rgb(24, 33, 49)  10px 10px;
+        border: solid black 5px;
+        border-radius: 10px;
+        background-color: white;
+    }
+
+
+    img {
+        width: 120px;
+        height: 120px;
+        display: block;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    #score{
+        display: block;
+        margin-top: 100px;
+        border-radius: 50px;
+        background-color: tomato;
+        color:white;
+        font-weight: bold;
+        bottom: 0;
+        text-align: center;
+    }
+
+    body{
+        background-color: coral;
+    }
+    button{
+        width: 120px;
+        height: 30px;
+        border-radius: 5px;
+        border: none;
+        background-color: wheat;
+    }
+
+    button:hover{
+        border: 1px solid black;
+    }
+</style>
+
+<script>
+    let computerPlay = () => {
+        let choices = ["rock", "paper", "scissor"];
+        let play = choices[Math.floor(Math.random() * choices.length)];
+        return play;
+    }
+    let cont = 0;
+    let computerChoice, humanChoice;
+    let btn = document.querySelectorAll(".btn");
+    btn.forEach(btn => btn.addEventListener("click", () => {
+        humanChoice = btn.value;
+        playGame(humanChoice);
+    }))
+
+    pPoints=0;
+    cPoints=0;
+
+    function playGame(humanChoice) {
+        computerChoice = computerPlay();
+        switch (humanChoice) {
+            case "rock":
+                if (computerChoice == "paper"){
+                    alert("You lost! Computer played " + computerChoice + " and you played " + humanChoice);
+                    cPoints+=1;
+                    cScore=document.getElementById("#cScore").textContent="COMPUTER:" + toString(cPoints);
+                }
+                else if (computerChoice == "scissor"){
+                    alert("You won! Computer played " + computerChoice + " and you played " + humanChoice);
+                }
+                else{
+                    alert("It's a tie! Computer played " + computerChoice + " and you played " + humanChoice);
+                }
+                break;
+            case "paper":
+                if (computerChoice == "paper"){
+                    alert("It's a tie! Computer played " + computerChoice + " and you played " + humanChoice);
+                }
+                else if (computerChoice == "scissor"){
+                    alert("You lost! Computer played " + computerChoice + " and you played " + humanChoice);
+                }
+                else{
+                    alert("You won! Computer played " + computerChoice + " and you played " + humanChoice);
+                }
+                break;
+            case "scissor":
+                if (computerChoice == "paper"){
+                    alert("You won! Computer played " + computerChoice + " and you played " + humanChoice);
+                }
+                else if (computerChoice == "scissor"){
+                    alert("It's a tie! Computer played " + computerChoice + " and you played " + humanChoice);
+                }
+                else{
+                    alert("You lost! Computer played " + computerChoice + " and you played " + humanChoice);
+                }
+                break;
+        }
+    }
+
+</script>
 
 </html>
