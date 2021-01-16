@@ -4,10 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock Paper Scissor</title>
 </head>
 
 <body>
+    <div id="top">
+        <h1>ROCK PAPER SCISSOR GAME</h1>
+    </div>
     <div id="main">
         <div class="choiceCard">
             <img src="../images/rock.png">
@@ -22,10 +25,10 @@
             <button class="btn" value="scissor">Play Scissor</button>
         </div>
         <div id="score">
-            <h1>SCORE</h1>
-            <p id="pScore">PLAYER:0</p>
-            <p id="cScore"> COMPUTER:0</p>
-        </div>        
+            <h2>SCORE</h2>
+            <p>PLAYER:0</p>
+            <p>COMPUTER:0</p>
+        </div>
     </div>
 </body>
 
@@ -34,12 +37,19 @@
         width: 100%;
         text-align: center;
         margin-top: 100px;
+        bottom: 0;
+        top: 0;
+        right: 0;
+        left: 0;
+        position: fixed;
+        background-color: wheat;
     }
 
     .choiceCard {
         display: inline-block;
         margin-right: 100px;
-        box-shadow:rgb(24, 33, 49)  10px 10px;
+        margin-top: 50px;
+        box-shadow: rgb(24, 33, 49) 10px 10px;
         border: solid black 5px;
         border-radius: 10px;
         background-color: white;
@@ -54,21 +64,32 @@
         text-align: center;
     }
 
-    #score{
+    #score {
         display: block;
-        margin-top: 100px;
-        border-radius: 50px;
-        background-color: tomato;
-        color:white;
+        background-color: black;
+        color: tomato;
         font-weight: bold;
+        position: absolute;
+        width: 100%;
         bottom: 0;
         text-align: center;
     }
 
-    body{
-        background-color: coral;
+    #top {
+        text-align: center;
+        color: tomato;
+        background-color: black;
+        top: 0;
+        right: 0;
+        position: absolute;
+        width: 100%;
     }
-    button{
+
+    body {
+        background-color: wheat;
+    }
+
+    button {
         width: 120px;
         height: 30px;
         border-radius: 5px;
@@ -76,12 +97,17 @@
         background-color: wheat;
     }
 
-    button:hover{
-        border: 1px solid black;
+    button:hover {
+        border: solid 2px coral;
     }
 </style>
 
 <script>
+    let score = document.getElementById("score").childNodes;
+    let cPoints = 0;
+    let pPoints = 0;
+
+    score = Array.from(score);
     let computerPlay = () => {
         let choices = ["rock", "paper", "scissor"];
         let play = choices[Math.floor(Math.random() * choices.length)];
@@ -93,51 +119,74 @@
     btn.forEach(btn => btn.addEventListener("click", () => {
         humanChoice = btn.value;
         playGame(humanChoice);
+        checkEnd(pPoints, cPoints);
+        if (checkEnd(pPoints, cPoints) === 1)
+            location.reload();
     }))
-
-    pPoints=0;
-    cPoints=0;
 
     function playGame(humanChoice) {
         computerChoice = computerPlay();
         switch (humanChoice) {
             case "rock":
-                if (computerChoice == "paper"){
+                if (computerChoice == "paper") {
                     alert("You lost! Computer played " + computerChoice + " and you played " + humanChoice);
-                    cPoints+=1;
-                    cScore=document.getElementById("#cScore").textContent="COMPUTER:" + toString(cPoints);
+                    cPoints++;
+                    score[5].textContent = "COMPUTER:" + cPoints;
                 }
-                else if (computerChoice == "scissor"){
+                else if (computerChoice == "scissor") {
                     alert("You won! Computer played " + computerChoice + " and you played " + humanChoice);
+                    pPoints++;
+                    score[3].textContent = "PLAYER:" + pPoints;
+
                 }
-                else{
+                else {
                     alert("It's a tie! Computer played " + computerChoice + " and you played " + humanChoice);
                 }
                 break;
             case "paper":
-                if (computerChoice == "paper"){
+                if (computerChoice == "paper") {
                     alert("It's a tie! Computer played " + computerChoice + " and you played " + humanChoice);
                 }
-                else if (computerChoice == "scissor"){
+                else if (computerChoice == "scissor") {
                     alert("You lost! Computer played " + computerChoice + " and you played " + humanChoice);
+                    cPoints++;
+                    score[5].textContent = "COMPUTER:" + cPoints;
                 }
-                else{
+                else {
                     alert("You won! Computer played " + computerChoice + " and you played " + humanChoice);
+                    pPoints++;
+                    score[3].textContent = "PLAYER:" + pPoints;
                 }
                 break;
             case "scissor":
-                if (computerChoice == "paper"){
+                if (computerChoice == "paper") {
                     alert("You won! Computer played " + computerChoice + " and you played " + humanChoice);
+                    pPoints++;
+                    score[3].textContent = "PLAYER:" + pPoints;
                 }
-                else if (computerChoice == "scissor"){
+                else if (computerChoice == "scissor") {
                     alert("It's a tie! Computer played " + computerChoice + " and you played " + humanChoice);
                 }
-                else{
+                else {
                     alert("You lost! Computer played " + computerChoice + " and you played " + humanChoice);
+                    cPoints++;
+                    score[5].textContent = "COMPUTER:" + cPoints;
                 }
                 break;
         }
     }
+    function checkEnd(pPoints, cPoints) {
+        if (pPoints >= 5) {
+            alert("YOU WON!\nRESTARTING THE GAME...");
+            return 1;
+        }
+        else if (cPoints >= 5) {
+            alert("THE COMPUTER WON!\nRESTARTING THE GAME...");
+            return 1;
+        }
+    }
+
+
 
 </script>
 
