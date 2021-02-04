@@ -1,9 +1,9 @@
-# TOP
+# THE ODIN PRJECT - FOUNDATION
 
-#en
+## EN
 Files and notes from The Odin Project course.
 More info on: https://www.theodinproject.com/
 
-#pt
+## PTBR
 Arquivos e anotações utilizadas no curso online The Odin Project.
 Main informações em: https://www.theodinproject.com/
